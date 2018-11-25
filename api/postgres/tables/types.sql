@@ -1,0 +1,1 @@
+create type permission as enum ('admin', 'user', 'itemcreate', 'itemupdate', 'itemdelete', 'permissionupdate');
