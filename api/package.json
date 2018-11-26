@@ -1,0 +1,27 @@
+{
+  "name": "rgz-api",
+  "version": "1.0.0",
+  "description": "RGZ eCommerce API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sebastian Matias Segura",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.3.0",
+    "jsonwebtoken": "^8.4.0",
+    "knex": "^0.15.2",
+    "morgan": "^1.9.1",
+    "nodemailer": "^4.7.0",
+    "redis": "^2.8.0",
+    "stripe": "^6.15.1"
+  }
+}
