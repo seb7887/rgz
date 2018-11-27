@@ -5,9 +5,12 @@ const cors = require('cors');
 const morgan = require('morgan');
 const compression = require('compression');
 const helmet = require('helmet');
+const expressValidator = require('express-validator');
 
 const config = require('./libs/config');
 const errorHandler = require('./handlers/error');
+
+const routes = require('./routes/routes');
 
 // Connect to Database
 const db = knex({
@@ -36,6 +39,10 @@ if (app.get('env') !== 'production') {
 app.use(helmet());
 app.use(compression());
 app.use(bodyParser.json());
+app.use(expressValidator());
+
+// Routes
+app.use('/api', routes);
 
 // Error handling
 app.use((req, res, next) => {
