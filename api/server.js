@@ -1,5 +1,4 @@
 const express = require('express');
-const knex = require('knex');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -11,12 +10,6 @@ const config = require('./libs/config');
 const errorHandler = require('./handlers/error');
 
 const routes = require('./routes/routes');
-
-// Connect to Database
-const db = knex({
-  client: 'pg',
-  connection: config.db,
-});
 
 // Create Express app
 const app = express();

@@ -1,8 +1,7 @@
-const db = require('knex');
 const bcrypt = require('bcryptjs');
 
 
-exports.handleRegister = (req, res) => {
+exports.handleRegister = (req, res, next, db) => {
   const { name, email, password } = req.body;
   if (!email || !name || !password) {
     return next({
@@ -11,8 +10,10 @@ exports.handleRegister = (req, res) => {
     });
   }
 
+  // Hash the password.
   const hash = bcrypt.hashSync(password);
-  // Insert into db table
+  
+  // Insert into db table.
   db.transaction(trx => {
     trx.insert({
       hash: hash,
@@ -24,8 +25,8 @@ exports.handleRegister = (req, res) => {
       return trx('customer')
         .returning('*')
         .insert({
-          email: loginEmail[0],
           name: name,
+          email: loginEmail[0],
           permissions: '{user}',
         })
         .then(customer => {
