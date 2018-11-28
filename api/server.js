@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const compression = require('compression');
 const helmet = require('helmet');
 const expressValidator = require('express-validator');
+const cookieParser = require('cookie-parser');
 
 const config = require('./libs/config');
 const errorHandler = require('./handlers/error');
@@ -33,6 +34,7 @@ app.use(helmet());
 app.use(compression());
 app.use(bodyParser.json());
 app.use(expressValidator());
+app.use(cookieParser());
 
 // Routes
 app.use('/api', routes);
