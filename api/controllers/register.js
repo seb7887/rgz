@@ -30,7 +30,7 @@ exports.handleRegister = (req, res, next, db) => {
           permissions: '{user}',
         })
         .then(customer => {
-          res.status(200).json(customer[0]);
+          res.status(200).json({ customer: customer[0], token: hash });
         })
     })
     .then(trx.commit)

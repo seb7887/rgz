@@ -1,8 +1,8 @@
 import React from 'react';
 import Router from 'next/router';
-import fetch from 'isomorphic-unfetch';
 import Form from '../styles/Form';
-import { endpoint } from '../../config';
+import { requestSignup } from '../../store/store';
+
 
 class Signup extends React.Component {
   state = {
@@ -18,17 +18,10 @@ class Signup extends React.Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const customer = await fetch(`${endpoint}/signup`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: this.state.name,
-        email: this.state.email,
-        password: this.state.password,
-        passwordConfirm: this.state.passwordConfirm
-      })
-    });
-    console.log(customer.json());
+    // const req = await api.signup(this.state);
+    // const data = await req.json();
+    // console.log(data);
+    requestSignup(this.state);
     Router.push('/');
   }
 

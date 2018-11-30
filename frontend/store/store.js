@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import * as api from '../services/api';
+import { setCookie } from '../lib/session';
 
 const DEFAULT_STATE = {
   isAuthenticated: false,
@@ -35,11 +36,16 @@ export const setCurrentCustomer = (customer) => {
 export const requestSignup = (data) => {
   return async dispatch => {
     const response = await api.signup(data);
+    console.log(response.json());
 
-    if (response.status !== 200) {
-      // Error
+    // api not provides token
+    if (!res.token) {
+      return res;
     }
 
+    // set the cookie
+    setCookie('token', token);
+    // set the current customer
     dispatch(setCurrentCustomer(response));
   }
 }
