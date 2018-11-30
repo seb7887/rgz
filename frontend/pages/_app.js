@@ -1,21 +1,17 @@
 import App, { Container } from "next/app";
-import withReduxStore from '../lib/withReduxStore';
-import { Provider } from 'react-redux';
 import Page from "../components/Page/Page";
 
 class MyApp extends App {
   render() {
-    const { Component, reduxStore } = this.props;
+    const { Component } = this.props;
     return (
       <Container>
-        <Provider store={reduxStore}>
-          <Page>
-            <Component />
-          </Page>
-        </Provider>
+        <Page>
+          <Component />
+        </Page>
       </Container>
     );
   }
 }
 
-export default withReduxStore(MyApp);
+export default MyApp;

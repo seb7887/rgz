@@ -1,7 +1,8 @@
 import React from 'react';
 import Router from 'next/router';
 import Form from '../styles/Form';
-import { requestSignup } from '../../store/store';
+import { signup } from '../../services/api';
+import { setCookie } from '../../lib/session';
 
 
 class Signup extends React.Component {
@@ -18,10 +19,10 @@ class Signup extends React.Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    // const req = await api.signup(this.state);
-    // const data = await req.json();
-    // console.log(data);
-    requestSignup(this.state);
+    const req = await signup(this.state);
+    const data = await req.json();
+    console.log(data);
+    setCookie('token', data.token);
     Router.push('/');
   }
 
