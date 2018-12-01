@@ -22,7 +22,14 @@ class Signup extends React.Component {
     const req = await signup(this.state);
     const data = await req.json();
     console.log(data);
-    setCookie('token', data.token);
+    // if signup success, set token in cookie.
+    if (data.token) {
+      // TODO: error managment
+      setCookie('token', data.token);
+    } else {
+
+    }
+    // Redirect to home page
     Router.push('/');
   }
 
