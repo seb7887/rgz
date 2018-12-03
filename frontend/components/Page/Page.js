@@ -50,7 +50,7 @@ class Page extends React.Component {
         <StyledPage>
           <GlobalStyle />
           <Meta />
-          <Header />
+          <Header {...this.props}/>
           <Inner>{this.props.children}</Inner>
         </StyledPage>
       </ThemeProvider>

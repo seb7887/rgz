@@ -6,6 +6,7 @@ class Signout extends React.Component {
   handleClick = e => {
     e.preventDefault();
     removeCookie('token');
+    this.props.unloadCustomer();
     Router.push('/');
   }
 

@@ -3,7 +3,7 @@ import NavStyles from './NavStyles';
 import Signout from '../Signout/Signout';
 import { getCookie } from '../../lib/session';
 
-const Nav = () => (
+const Nav = (props) => (
   
   <NavStyles>
     <Link href="/shop">
@@ -20,7 +20,7 @@ const Nav = () => (
         <Link href="/me">
           <a>Account</a>
         </Link>
-        <Signout />
+        <Signout {...props} />
       </>
     )}
     {!getCookie('token') && (

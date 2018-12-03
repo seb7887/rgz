@@ -50,7 +50,7 @@ const Logo = styled.h1`
  * Component
  */
 
-const Header = () => (
+const Header = (props) => (
   <StyledHeader>
     <div className='bar'>
       <Logo>
@@ -58,7 +58,7 @@ const Header = () => (
           <a>RGZ</a>
         </Link>
       </Logo>
-      <Nav />
+      <Nav {...props}/>
     </div>
     <div className='sub-bar'>
       <p>Search</p>

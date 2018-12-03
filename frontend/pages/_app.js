@@ -10,11 +10,15 @@ class MyApp extends App {
     this.setState({ me: data });
   }
 
+  unloadCustomer = () => {
+    this.setState({ me: {} });
+  }
+
   render() {
     const { Component } = this.props;
     return (
       <Container>
-        <Page>
+        <Page unloadCustomer={this.unloadCustomer}>
           <Component loadCustomer={this.loadCustomer} />
         </Page>
       </Container>
