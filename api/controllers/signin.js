@@ -5,6 +5,7 @@ const config = require('../libs/config');
 
 const redisClient = redis.createClient();
 
+// Checks if login data is correct and returns the customer
 const handleSignin = (req, res, next, db) => {
   const { email, password } = req.body;
   if (!email || !password) {
@@ -38,6 +39,7 @@ const handleSignin = (req, res, next, db) => {
     })
 }
 
+// Gets the customer id associated with the token
 const getAuthTokenId = (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];
   console.log(`auth ${token}`);
@@ -52,15 +54,18 @@ const getAuthTokenId = (req, res, next) => {
   })
 }
 
+// Signs a new token
 const signToken = (email) => {
   const jwtPayload = { email };
   return jwt.sign(jwtPayload, config.jwtSecret, { expiresIn: '2 days' });
 }
 
+// Store the token and customer id in Redis
 const setToken = (token, value) => {
   return Promise.resolve(redisClient.set(token, value));
 }
 
+// Creates a new session
 const createSessions = (customer) => {
   // JWT token, return customer data
   const { email, customer_id } = customer;
@@ -74,6 +79,7 @@ const createSessions = (customer) => {
     .catch(console.log);
 }
 
+// Handles sign in
 const signInAuth = (db) => (req, res, next) => {
   const { authorization } = req.headers;
   return authorization ? getAuthTokenId(req, res, next) :

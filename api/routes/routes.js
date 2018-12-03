@@ -6,6 +6,7 @@ const db = require('../db/db');
 const register = require('../controllers/register');
 const signin = require('../controllers/signin');
 const customers = require('../controllers/customers');
+const items = require('../controllers/items');
 
 // Middleware
 const validation = require('../middleware/validation');
@@ -17,5 +18,9 @@ router.post('/signin', validation.validateSignin, signin.signInAuth(db));
 
 // Customers
 router.get('/me/:id', auth.requireAuth, (req, res, next) => customers.handleCustomer(req, res, next, db));
+
+// Items
+router.post('/item', auth.requireAuth, (req, res, next) => items.createItem(req, res, next, db));
+router.get('/', (req, res, next) => items.readItems(req, res, next, db));
 
 module.exports = router;
