@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import NavStyles from './NavStyles';
+import Signout from '../Signout/Signout';
 import { getCookie } from '../../lib/session';
 
 const Nav = () => (
@@ -19,6 +20,7 @@ const Nav = () => (
         <Link href="/me">
           <a>Account</a>
         </Link>
+        <Signout />
       </>
     )}
     {!getCookie('token') && (
