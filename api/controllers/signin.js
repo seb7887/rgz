@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { redisClient } = require('../redis/redisClient');
+const redis = require('redis');
 const config = require('../libs/config');
+
+const redisClient = redis.createClient();
 
 const handleSignin = (req, res, next, db) => {
   const { email, password } = req.body;
@@ -13,7 +15,7 @@ const handleSignin = (req, res, next, db) => {
   }
 
   return db.select('email', 'hash').from('login')
-    .where('email', '=', 'email')
+    .where('email', '=', email)
     .then(data => {
       const isValid = bcrypt.compareSync(password, data[0].hash);
       if (isValid) {
@@ -37,10 +39,14 @@ const handleSignin = (req, res, next, db) => {
 }
 
 const getAuthTokenId = (req, res, next) => {
-  const { authorization } = req.headers;
-  return redisClient.get(authorization, (err, reply) => {
-    if (err || reply) {
-      return res.status(400).json('Unauthorized');
+  const token = req.headers.authorization.split(' ')[1];
+  console.log(`auth ${token}`);
+  return redisClient.get(token, (err, reply) => {
+    if (err || !reply) {
+      return next({
+        status: 400,
+        message: 'Unauthorized'
+      });
     }
     return res.json({ customer_id: reply });
   })
@@ -58,7 +64,9 @@ const setToken = (token, value) => {
 const createSessions = (customer) => {
   // JWT token, return customer data
   const { email, customer_id } = customer;
+  console.log(`customer ${customer_id}`);
   const token = signToken(email);
+  console.log(`token ${token}`);
   return setToken(token, customer_id)
     .then(() => {
       return { success: 'true', customerId: customer_id, token };
@@ -69,7 +77,7 @@ const createSessions = (customer) => {
 exports.signInAuth = (db) => (req, res, next) => {
   const { authorization } = req.headers;
   return authorization ? getAuthTokenId(req, res, next) :
-    handleSignin(req, res, next)
+    handleSignin(req, res, next, db)
       .then(data => {
         return data.customer_id && data.email ? createSessions(data) : Promise.reject(data);
       })
@@ -77,7 +85,7 @@ exports.signInAuth = (db) => (req, res, next) => {
       .catch(err => {
         return next({
           status: 400,
-          message: err
+          message: 'Cannot create session'
         })
       })
 }
