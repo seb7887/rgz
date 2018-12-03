@@ -17,3 +17,24 @@ export const signup = ({ name, email, password, passwordConfirm }) => {
     })
   });
 }
+
+export const signin = ({ email, password }) => {
+  return fetch(`${endpoint}/signin`, {
+    method: 'POST',
+    headers: requestHeaders,
+    body: JSON.stringify({
+      email: email,
+      password: password
+    })
+  });
+}
+
+export const getCustomer = ({ customerId, token }) => {
+  return fetch(`${endpoint}/me/${customerId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    }
+  });
+}

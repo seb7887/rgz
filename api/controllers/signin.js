@@ -74,7 +74,7 @@ const createSessions = (customer) => {
     .catch(console.log);
 }
 
-exports.signInAuth = (db) => (req, res, next) => {
+const signInAuth = (db) => (req, res, next) => {
   const { authorization } = req.headers;
   return authorization ? getAuthTokenId(req, res, next) :
     handleSignin(req, res, next, db)
@@ -89,3 +89,5 @@ exports.signInAuth = (db) => (req, res, next) => {
         })
       })
 }
+
+module.exports = { signInAuth, redisClient };

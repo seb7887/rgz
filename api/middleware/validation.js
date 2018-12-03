@@ -20,3 +20,22 @@ exports.validateRegister = (req, res, next) => {
   }
   next();
 }
+
+exports.validateSignin = (req, res, next) => {
+  req.checkBody('email', 'You must supply an email').isEmail();
+  req.sanitizeBody('email').normalizeEmail({
+    gmail_remove_dots: false,
+    remove_extension: false,
+    gmail_remove_subaddress: false,
+  });
+  req.checkBody('password', 'Password cannot be blank').notEmpty();
+
+  const errors = req.validationErrors();
+  if (errors) {
+    return next({
+      status: 400,
+      message: 'Form validation error',
+    });
+  }
+  next();
+}
