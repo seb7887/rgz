@@ -6,7 +6,7 @@ import { getCookie } from '../../lib/session';
 const Nav = (props) => (
   
   <NavStyles>
-    <Link href="/shop">
+    <Link href="/">
       <a>Shop</a>
     </Link>
     {getCookie('token') && (

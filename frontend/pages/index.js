@@ -1,9 +1,9 @@
-import Link from 'next/link';
+import Items from '../components/Items/Items';
+import { getItems } from '../services/api';
+import React from 'react';
 
 const Home = (props) => (
-  <div>
-    <p>Hey!</p>
-  </div>
+  <Items items={props.items} />
 )
 
 export default Home;

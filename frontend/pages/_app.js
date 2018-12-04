@@ -1,10 +1,18 @@
 import App, { Container } from "next/app";
 import Page from "../components/Page/Page";
+import { getItems } from '../services/api';
 
 class MyApp extends App {
   state = {
-    me: {}
+    me: {},
   };
+
+  static async getInitialProps() {
+    const res = await getItems();
+    const items = await res.json();
+    console.log(items);
+    return { items };
+  }
 
   loadCustomer = (data) => {
     this.setState({ me: data });
@@ -18,8 +26,8 @@ class MyApp extends App {
     const { Component } = this.props;
     return (
       <Container>
-        <Page unloadCustomer={this.unloadCustomer}>
-          <Component loadCustomer={this.loadCustomer} />
+        <Page unloadCustomer={this.unloadCustomer} >
+          <Component loadCustomer={this.loadCustomer} items={this.props.items}/>
         </Page>
       </Container>
     );

@@ -62,6 +62,13 @@ export const createItem = ({ title, brand, model, gender, product, description, 
   });
 }
 
+export const getItems = () => {
+  return fetch(`${endpoint}/items`, {
+    method: 'GET',
+    headers: requestHeaders
+  });
+}
+
 // Cloudinary API
 
 export const uploadImage = (data) => {

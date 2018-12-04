@@ -33,7 +33,7 @@ exports.createItem = (req, res, next, db) => {
 exports.readItems = (req, res, next, db) => {
   db.select('*').from('item')
     .then(items => {
-      res.status(400).json(items);
+      res.status(200).json(items);
     })
     .catch(err => {
       return next({

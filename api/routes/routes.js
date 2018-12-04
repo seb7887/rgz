@@ -21,6 +21,6 @@ router.get('/me/:id', auth.requireAuth, (req, res, next) => customers.handleCust
 
 // Items
 router.post('/item', auth.requireAuth, (req, res, next) => items.createItem(req, res, next, db));
-router.get('/', (req, res, next) => items.readItems(req, res, next, db));
+router.get('/items', (req, res, next) => items.readItems(req, res, next, db));
 
 module.exports = router;
