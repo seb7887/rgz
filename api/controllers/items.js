@@ -1,17 +1,17 @@
 // Create a new item
 exports.createItem = (req, res, next, db) => {
-  const { title, brand, model, gender, product, description, image, large_image, price} = req.body;
+  const { title, brand, model, gender, product, description, image, largeImage, price} = req.body;
   db.transaction(trx => {
     trx.insert({
-      title,
-      brand,
-      model,
-      gender,
-      product,
-      description,
-      image,
-      large_image,
-      price,
+      title: title,
+      brand: brand,
+      model: model,
+      gender: gender,
+      product: product,
+      description: description,
+      image: image,
+      large_image: largeImage,
+      price: price,
     })
     .into('item')
     .returning('*')
