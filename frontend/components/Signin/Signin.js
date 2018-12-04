@@ -32,29 +32,31 @@ class Signin extends React.Component {
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-        <h2>Sign In</h2>
-        <hr />
-        <label htmlFor="email">
-          Email
-          <input
-            type="email"
-            name="email"
-            placeholder="your@email.com"
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
-        </label>
-        <label htmlFor="password">
-          Password
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-        </label>
-        <button type="submit">Sign In</button>
+        <fieldset>
+          <h2>Sign In</h2>
+          <hr />
+          <label htmlFor="email">
+            Email
+            <input
+              type="email"
+              name="email"
+              placeholder="your@email.com"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </label>
+          <label htmlFor="password">
+            Password
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+          </label>
+          <button type="submit">Sign In</button>
+        </fieldset>
       </Form>
     );
   }

@@ -86,6 +86,12 @@ const Form = styled.form`
       animation: ${loading} 0.5s linear infinite;
     }
   }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    font-size: 1.4rem;
+  }
 `;
 
 export default Form;

@@ -1,9 +1,11 @@
 import fetch from 'isomorphic-unfetch';
-import { endpoint } from '../config';
+import { endpoint, cloudinaryAPI } from '../config';
 
 const requestHeaders = {
   'Content-Type': 'application/json'
 };
+
+// Backend API
 
 export const signup = ({ name, email, password, passwordConfirm }) => {
   return fetch(`${endpoint}/signup`, {
@@ -36,5 +38,35 @@ export const getCustomer = ({ customerId, token }) => {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
     }
+  });
+}
+
+export const createItem = ({ title, brand, model, gender, product, description, image, largeImage, price}, token) => {
+  return fetch(`${endpoint}/item`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      title: title,
+      brand: brand,
+      model: model,
+      gender: gender,
+      product: product,
+      description: description,
+      image: image,
+      largeImage: largeImage,
+      price: price
+    })
+  });
+}
+
+// Cloudinary API
+
+export const uploadImage = (data) => {
+  return fetch(cloudinaryAPI, {
+    method: 'POST',
+    body: data
   });
 }
