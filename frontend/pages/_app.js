@@ -1,10 +1,12 @@
 import App, { Container } from "next/app";
+import Router from 'next/router';
 import Page from "../components/Page/Page";
 import { getItems } from '../services/api';
 
 class MyApp extends App {
   state = {
     me: {},
+    items: {}
   };
 
   static async getInitialProps() {
@@ -12,6 +14,10 @@ class MyApp extends App {
     const items = await res.json();
     console.log(items);
     return { items };
+  }
+
+  componentWillMount() {
+    this.setState({ items: this.props.items });
   }
 
   loadCustomer = (data) => {
@@ -27,7 +33,7 @@ class MyApp extends App {
     return (
       <Container>
         <Page unloadCustomer={this.unloadCustomer} >
-          <Component loadCustomer={this.loadCustomer} items={this.props.items}/>
+          <Component loadCustomer={this.loadCustomer} items={this.state.items}/>
         </Page>
       </Container>
     );

@@ -42,3 +42,25 @@ exports.readItems = (req, res, next, db) => {
       });
     })
 }
+
+// Get single item
+exports.readItem = (req, res, next, db) => {
+  const { id } = req.params;
+  db.select('*').from('item').where('item_id', '=', id)
+    .then(item => {
+      if (item.length) {
+        res.status(200).json(item[0]);
+      } else {
+        return next({
+          status: 400,
+          message: 'Item not found',
+        });
+      }
+    })
+    .catch(err => {
+      return next({
+        status: 400,
+        message: 'Error getting item',
+      })
+    })
+}
