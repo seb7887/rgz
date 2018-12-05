@@ -6,7 +6,7 @@ const Items = (props) => (
   <Center>
     <ItemList>
       {
-        props.items.map(item => <Item item={item} key={item.item_id} />)
+        props.items.map(item => <Item item={item} key={item.item_id} loadItem={props.loadItem} />)
       }
     </ItemList>
   </Center>

@@ -13,6 +13,7 @@ const Title = styled.h3`
     text-align: center;
     color: ${props => props.theme.white};
     padding: 0 1rem;
+    cursor: pointer;
   }
 `;
 

@@ -1,12 +1,12 @@
 import App, { Container } from "next/app";
-import Router from 'next/router';
 import Page from "../components/Page/Page";
 import { getItems } from '../services/api';
 
 class MyApp extends App {
   state = {
     me: {},
-    items: {}
+    items: {},
+    item: {}
   };
 
   static async getInitialProps() {
@@ -28,12 +28,21 @@ class MyApp extends App {
     this.setState({ me: {} });
   }
 
+  loadItem = (data) => {
+    this.setState({ item: data});
+  }
+
   render() {
     const { Component } = this.props;
     return (
       <Container>
         <Page unloadCustomer={this.unloadCustomer} >
-          <Component loadCustomer={this.loadCustomer} items={this.state.items}/>
+          <Component
+            loadCustomer={this.loadCustomer}
+            items={this.state.items}
+            item={this.state.item}
+            loadItem={this.loadItem}
+          />
         </Page>
       </Container>
     );

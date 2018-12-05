@@ -69,6 +69,16 @@ export const getItems = () => {
   });
 }
 
+export const getItem = (id, token) => {
+  return fetch(`${endpoint}/item/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+}
+
 // Cloudinary API
 
 export const uploadImage = (data) => {
