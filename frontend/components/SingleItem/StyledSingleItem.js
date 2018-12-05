@@ -22,10 +22,27 @@ const StyledSingleItem = styled.div`
 
   ul {
     list-style: none;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
     box-sizing: border-box;
     padding: 0;
+    margin: 0;
+
+    li {
+      display: flex;
+      flex-direction: column;
+
+      strong {
+        font-size: 1.5rem;
+        opacity: 0.5;
+      }
+
+      span {
+        text-transform: uppercase;
+      }
+
+    }
   }
 `;
 
