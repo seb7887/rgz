@@ -64,3 +64,40 @@ exports.readItem = (req, res, next, db) => {
       })
     })
 }
+
+// Update item
+exports.updateItem = (req, res, next, db) => {
+  const { id } = req.params;
+  const { title, brand, model, gender, product, description, image, largeImage, price} = req.body;
+
+  db('item')
+    .where({ item_id: id })
+    .update({
+      title: title,
+      brand: brand,
+      model: model,
+      gender: gender,
+      product: product,
+      description: description,
+      image: image,
+      large_image: largeImage,
+      price: price,
+    })
+    .then(resp => {
+      console.log(resp);
+      if (resp) {
+        res.status(200).json('success');
+      } else {
+        return next({
+          status: 400,
+          message: 'Unable to update',
+        });
+      }
+    })
+    .catch(err => {
+      return next({
+        status: 400,
+        message: 'Error updating user',
+      });
+    })
+}
