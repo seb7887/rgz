@@ -4,6 +4,7 @@ import Router from 'next/router';
 import StyledItem from './StyledItem';
 import Title from '../styles/Title';
 import PriceTag from '../styles/PriceTag';
+import DeleteItem from '../DeleteItem/DeleteItem';
 import formatMoney from '../../lib/formatMoney';
 import { getItem } from '../../services/api';
 import { getCookie } from '../../lib/session';
@@ -48,6 +49,7 @@ class Item extends React.Component {
 
         <div className="buttonList">
           <a onClick={this.handleUpdate}>Edit</a>
+          <DeleteItem id={item.item_id}>Delete</DeleteItem>
         </div>
       </StyledItem>
     );

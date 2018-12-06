@@ -98,6 +98,16 @@ export const updateItem = (id, token, { title, brand, model, gender, product, de
   });
 }
 
+export const deleteItem = (id, token) => {
+  return fetch(`${endpoint}/item/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    }
+  });
+}
+
 // Cloudinary API
 
 export const uploadImage = (data) => {

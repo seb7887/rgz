@@ -41,6 +41,10 @@ const StyledItem = styled.div`
     a {
       cursor: pointer;
     }
+
+    button {
+      cursor: pointer;
+    }
   }
 `;
 

@@ -59,7 +59,6 @@ class UpdateItem extends React.Component {
 
   render() {
     const { item } = this.state;
-    console.log(item);
     return (
       <Form onSubmit={this.update}>
         <fieldset>
