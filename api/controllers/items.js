@@ -86,14 +86,40 @@ exports.updateItem = (req, res, next, db) => {
       } else {
         return next({
           status: 400,
-          message: 'Unable to update',
+          message: 'Unable to update item',
         });
       }
     })
     .catch(err => {
       return next({
         status: 400,
-        message: 'Error updating user',
+        message: 'Error updating item',
+      });
+    })
+}
+
+// Delete Item
+exports.deleteItem = (req, res, next, db) => {
+  const { id } = req.params;
+
+  db('item')
+    .where({ item_id: id })
+    .del()
+    .then(resp => {
+      console.log(resp);
+      if (resp) {
+        res.status(200).json('success');
+      } else {
+        return next({
+          status: 400,
+          message: 'Cannot delete item',
+        });
+      }
+    })
+    .catch(err => {
+      return next({
+        status: 400,
+        message: 'Error deleting item',
       });
     })
 }

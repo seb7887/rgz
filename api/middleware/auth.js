@@ -53,8 +53,7 @@ const hasPermission = (id, permissions, next) => {
     })
 }
 
-exports.checkPermissionUpdate = (req, res, next) => {
-  const permissions = ['admin', 'itemupdate'];
+const checkPermission = (req, next, permissions) => {
   const { authorization } = req.headers;
   const token = authorization.split(' ')[1];
 
@@ -63,4 +62,14 @@ exports.checkPermissionUpdate = (req, res, next) => {
     console.log(`id ${id}`);
     hasPermission(id, permissions, next);
   })
+}
+
+exports.checkPermissionUpdate = (req, res, next) => {
+  const permissions = ['admin', 'itemupdate'];
+  checkPermission(req, next, permissions);
+}
+
+exports.checkPermissionDelete = (req, res, next) => {
+  const permissions = ['admin', 'itemdelete'];
+  checkPermission(req, next, permissions);
 }
