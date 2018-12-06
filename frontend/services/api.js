@@ -79,6 +79,25 @@ export const getItem = (id, token) => {
   });
 }
 
+export const updateItem = (id, token, { title, brand, model, gender, product, description, price}) => {
+  return fetch(`${endpoint}/item/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      title: title,
+      brand: brand,
+      model: model,
+      gender: gender,
+      product: product,
+      description: description,
+      price: price
+    })
+  });
+}
+
 // Cloudinary API
 
 export const uploadImage = (data) => {

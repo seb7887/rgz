@@ -68,7 +68,7 @@ exports.readItem = (req, res, next, db) => {
 // Update item
 exports.updateItem = (req, res, next, db) => {
   const { id } = req.params;
-  const { title, brand, model, gender, product, description, image, largeImage, price} = req.body;
+  const { title, brand, model, description, price} = req.body;
 
   db('item')
     .where({ item_id: id })
@@ -76,11 +76,7 @@ exports.updateItem = (req, res, next, db) => {
       title: title,
       brand: brand,
       model: model,
-      gender: gender,
-      product: product,
       description: description,
-      image: image,
-      large_image: largeImage,
       price: price,
     })
     .then(resp => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
 import Router from 'next/router';
 import StyledItem from './StyledItem';
 import Title from '../styles/Title';
@@ -14,14 +13,26 @@ class Item extends React.Component {
     item: PropTypes.object.isRequired,
   };
 
-  handleClick = async (e) => {
-    e.preventDefault();
+  getFromAPI = async () => {
     const token = getCookie('token');
     const req = await getItem(this.props.item.item_id, token);
     const data = await req.json();
     console.log(data);
     this.props.loadItem(data);
-    Router.push(`/item`);
+  }
+
+  handleClick = (e) => {
+    e.preventDefault();
+    console.log('show item');
+    this.getFromAPI();
+    Router.push('/item');
+  }
+
+  handleUpdate = (e) => {
+    e.preventDefault();
+    console.log('update');
+    this.getFromAPI();
+    Router.push('/update');
   }
 
   render() {
@@ -36,9 +47,7 @@ class Item extends React.Component {
         <p>{item.description}</p>
 
         <div className="buttonList">
-          <Link href="/">
-            <a>Edit</a>
-          </Link>
+          <a onClick={this.handleUpdate}>Edit</a>
         </div>
       </StyledItem>
     );
