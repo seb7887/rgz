@@ -12,7 +12,7 @@ class DeleteItem extends React.Component {
       const req = await deleteItem(this.props.id, token);
       const deleted = await req.json();
       console.log(deleted);
-      Router.push('/');
+      this.props.refreshItems();
     }
   }
 

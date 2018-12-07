@@ -9,7 +9,7 @@ const Items = (props) => (
     <Pagination page={props.page} count={props.count} loadPage={props.loadPage} />
     <ItemList>
       {
-        props.items.map(item => <Item item={item} key={item.item_id} loadItem={props.loadItem} />)
+        props.items.map(item => <Item item={item} key={item.item_id} loadItem={props.loadItem} refreshItems={props.refreshItems} />)
       }
     </ItemList>
     <Pagination page={props.page} count={props.count} loadPage={props.loadPage} />

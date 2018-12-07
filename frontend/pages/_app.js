@@ -70,7 +70,10 @@ class MyApp extends App {
     const { Component } = this.props;
     return (
       <Container>
-        <Page unloadCustomer={this.unloadCustomer} >
+        <Page 
+          unloadCustomer={this.unloadCustomer}
+          refreshItems={this.refreshItems}
+        >
           <Component
             loadCustomer={this.loadCustomer}
             items={this.state.items}
@@ -79,6 +82,7 @@ class MyApp extends App {
             page={this.state.page}
             loadItem={this.loadItem}
             loadPage={this.loadPage}
+            refreshItems={this.refreshItems}
           />
         </Page>
       </Container>

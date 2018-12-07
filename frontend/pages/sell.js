@@ -2,7 +2,7 @@ import CreateItem from '../components/CreateItem/CreateItem';
 
 const Sell = (props) => (
   <div>
-    <CreateItem />
+    <CreateItem refreshItems={props.refreshItems} />
   </div>
 )
 

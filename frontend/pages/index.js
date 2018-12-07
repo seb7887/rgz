@@ -9,6 +9,7 @@ const Home = (props) => (
     page={props.page}
     loadItem={props.loadItem}
     loadPage={props.loadPage}
+    refreshItems={props.refreshItems}
   />
 )
 

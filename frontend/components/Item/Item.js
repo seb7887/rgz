@@ -49,7 +49,7 @@ class Item extends React.Component {
 
         <div className="buttonList">
           <a onClick={this.handleUpdate}>Edit</a>
-          <DeleteItem id={item.item_id}>Delete</DeleteItem>
+          <DeleteItem id={item.item_id} refreshItems={this.props.refreshItems}>Delete</DeleteItem>
         </div>
       </StyledItem>
     );

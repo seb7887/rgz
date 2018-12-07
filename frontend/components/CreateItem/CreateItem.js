@@ -42,7 +42,7 @@ class CreateItem extends React.Component {
     e.preventDefault();
     const token = getCookie('token');
     const res = await createItem(this.state, token);
-    Router.push('/');
+    this.props.refreshItems();
   }
 
   render() {
