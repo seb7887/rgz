@@ -1,3 +1,6 @@
+const config = require('../libs/config');
+const perPage = config.perPage;
+
 // Create a new item
 exports.createItem = (req, res, next, db) => {
   const { title, brand, model, gender, product, description, image, largeImage, price} = req.body;
@@ -39,6 +42,37 @@ exports.readItems = (req, res, next, db) => {
       return next({
         status: 400,
         message: 'Cannot get items',
+      });
+    })
+}
+
+// Get items with pagination
+exports.readPage = (req, res, next, db) => {
+  const { page } = req.params;
+  db.select('*').from('item').limit(perPage).offset(page)
+    .then(items => {
+      res.status(200).json(items);
+    })
+    .catch(err => {
+      return next({
+        status: 400,
+        message: 'Cannot get items',
+      });
+    })
+}
+
+// Get number of items
+exports.totalItems = (req, res, next, db) => {
+  db('item').count()
+    .then(result => {
+      res.status(200).json({
+        total: result[0]
+      });
+    })
+    .catch(err => {
+      return next({
+        status: 400,
+        message: 'Cannot count items',
       });
     })
 }

@@ -3,7 +3,13 @@ import { getItems } from '../services/api';
 import React from 'react';
 
 const Home = (props) => (
-  <Items items={props.items} loadItem={props.loadItem} />
+  <Items 
+    items={props.items}
+    count={props.count}
+    page={props.page}
+    loadItem={props.loadItem}
+    loadPage={props.loadPage}
+  />
 )
 
 export default Home;

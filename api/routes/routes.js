@@ -22,6 +22,8 @@ router.get('/me/:id', auth.requireAuth, (req, res, next) => customers.handleCust
 // Items
 router.post('/item', auth.requireAuth, (req, res, next) => items.createItem(req, res, next, db));
 router.get('/items', (req, res, next) => items.readItems(req, res, next, db));
+router.get('/items/total', (req, res, next) => items.totalItems(req, res, next, db));
+router.get('/items/:page', (req, res, next) => items.readPage(req, res, next, db));
 router.get('/item/:id', (req, res, next) => items.readItem(req, res, next, db));
 router.put('/item/:id', auth.requireAuth, auth.checkPermissionUpdate, (req, res, next) => items.updateItem(req, res, next, db));
 router.delete('/item/:id', auth.requireAuth, auth.checkPermissionDelete, (req, res, next) => items.deleteItem(req, res, next, db));

@@ -69,6 +69,20 @@ export const getItems = () => {
   });
 }
 
+export const getTotalOfItems = () => {
+  return fetch(`${endpoint}/items/total`, {
+    method: 'GET',
+    headers: requestHeaders
+  });
+}
+
+export const getPage = (page) => {
+  return fetch(`${endpoint}/items/${page}`, {
+    method: 'GET',
+    headers: requestHeaders
+  });
+}
+
 export const getItem = (id, token) => {
   return fetch(`${endpoint}/item/${id}`, {
     method: 'GET',
