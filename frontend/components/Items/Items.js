@@ -1,14 +1,15 @@
 import React from 'react';
 import Item from '../Item/Item';
+import Pagination from '../Pagination/Pagination';
 import { Center, ItemList } from './StyledItems';
 
 const Items = (props) => (
   <Center>
-    <ItemList>
-      {
-        props.items.map(item => <Item item={item} key={item.item_id} loadItem={props.loadItem} />)
-      }
-    </ItemList>
+      <ItemList>
+        {
+          props.items.map(item => <Item item={item} key={item.item_id} loadItem={props.loadItem} />)
+        }
+      </ItemList>
   </Center>
 )
 
