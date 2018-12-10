@@ -18,6 +18,8 @@ router.post('/signin', validation.validateSignin, signin.signInAuth(db));
 
 // Customers
 router.get('/me/:id', auth.requireAuth, (req, res, next) => customers.handleCustomer(req, res, next, db));
+router.get('/customers', auth.requireAuth, (req, res, next) => customers.handleCustomers(req, res, next, db));
+router.put('/customers/:id', auth.requireAuth, auth.checkPermissionAdmin, (req, res, next) => customers.updatePermission(req, res, next, db));
 
 // Items
 router.post('/item', auth.requireAuth, (req, res, next) => items.createItem(req, res, next, db));

@@ -1,14 +1,22 @@
+import React from 'react';
 import Signin from '../Signin/Signin';
 import { getCookie } from '../../lib/session';
 
-const PleaseSignIn = (props) => {
-  { !getCookie('token') && 
-    <div>
-      <p>Please Sign In before continuing</p>
-      <Signin />
-    </div>
+class PleaseSignIn extends React.Component {
+  render() {
+    if(!getCookie('token')) {
+      return (
+        <div>
+          <p>Please Sign In before continuing</p>
+          <Signin loadCustomer={this.props.loadCustomer} />
+        </div>
+      );
+    } else {
+      return (
+        this.props.children
+      );
+    }
   }
-  { getCookie('token') && props.children }
 }
 
 export default PleaseSignIn;

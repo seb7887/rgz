@@ -1,3 +1,4 @@
+// Gets a customer by id
 exports.handleCustomer = (req, res, next, db) => {
   const { id } = req.params;
   db.select('*').from('customer').where('customer_id', '=', id)
@@ -15,6 +16,55 @@ exports.handleCustomer = (req, res, next, db) => {
       return next({
         status: 400,
         message: 'Error getting customer',
+      });
+    })
+}
+
+// Gets all customers
+exports.handleCustomers = (req, res, next, db) => {
+  db.select('*').from('customer')
+    .then(customers => {
+      if (customers.length) {
+        res.status(200).json(customers);
+      } else {
+        return next({
+          status: 400,
+          message: 'Cannot get customers',
+        });
+      }
+    })
+    .catch(err => {
+      return next({
+        status: 400,
+        message: 'Error getting customers',
+      });
+    })
+}
+
+// Updates permissions
+exports.updatePermission = (req, res, next, db) => {
+  const { id } = req.params;
+  const { permissions } = req.body;
+
+  db('customer')
+    .where({ customer_id: id })
+    .update({
+      permissions: permissions,
+    })
+    .then(resp => {
+      if (resp) {
+        res.status(200).json('success');
+      } else {
+        return next({
+          status: 400,
+          message: 'Unable to update permissions',
+        });
+      }
+    })
+    .catch(err => {
+      return next({
+        status: 400,
+        message: 'Cannot update permissions',
       });
     })
 }

@@ -41,6 +41,29 @@ export const getCustomer = ({ customerId, token }) => {
   });
 }
 
+export const getCustomers = (token) => {
+  return fetch(`${endpoint}/customers`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    }
+  });
+}
+
+export const updatePermissions = (permissions, id, token) => {
+  return fetch(`${endpoint}/customers/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      permissions: permissions
+    })
+  });
+}
+
 export const createItem = ({ title, brand, model, gender, product, description, image, largeImage, price}, token) => {
   return fetch(`${endpoint}/item`, {
     method: 'POST',

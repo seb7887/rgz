@@ -73,3 +73,8 @@ exports.checkPermissionDelete = (req, res, next) => {
   const permissions = ['admin', 'itemdelete'];
   checkPermission(req, next, permissions);
 }
+
+exports.checkPermissionAdmin = (req, res, next) => {
+  const permissions = ['admin', 'permissionupdate'];
+  checkPermission(req, next, permissions);
+}
