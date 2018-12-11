@@ -22,9 +22,9 @@ const createCartItem = (c_id, i_id, res, next, db) => {
 }
 
 // Update quantity
-const updateQuantity = (id, qty, res, next, db) => {
+const updateQuantity = (c_id, i_id, qty, res, next, db) => {
   db('cart_item')
-    .where({ item_id: id})
+    .where({ item_id: i_id, customer_id: c_id})
     .update({ quantity: qty })
     .then(resp => {
       res.status(200).json('success');
@@ -38,9 +38,9 @@ const updateQuantity = (id, qty, res, next, db) => {
 }
 
 // Deletes a cart item
-const deleteCartItem = (i_id, res, next, db) => {
+const deleteCartItem = (c_id, i_id, res, next, db) => {
   db('cart_item')
-    .where({ item_id: i_id })
+    .where({ item_id: i_id, customer_id: c_id })
     .del()
     .then(resp => {
       if (resp) {
@@ -68,7 +68,7 @@ exports.addToCart = (req, res, next, db) => {
     .where('item_id', '=', i_id)
     .then(item => {
       if (item.length) {
-        updateQuantity(i_id, item[0].quantity + 1, res, next, db);
+        updateQuantity(c_id, i_id, item[0].quantity + 1, res, next, db);
       } else {
         createCartItem(c_id, i_id, res, next, db);
       }
@@ -85,6 +85,7 @@ exports.addToCart = (req, res, next, db) => {
 exports.getCart = (req, res, next, db) => {
   const { c_id } = req.params;
   db.select('*').from('cart_item')
+    .join('item', 'cart_item.item_id', '=', 'item.item_id')
     .where('customer_id', '=', c_id)
     .then(items => {
       if (items.length) {
@@ -106,16 +107,40 @@ exports.removeFromCart = (req, res, next, db) => {
     .where('customer_id', '=', c_id)
     .where('item_id', '=', i_id)
     .then(item => {
+      console.log(item[0]);
       if (item.length && item[0].quantity > 1) {
-        updateQuantity(i_id, item[0].quantity - 1, res, next, db);
+        updateQuantity(c_id, i_id, item[0].quantity - 1, res, next, db);
       } else if (item[0].quantity === 1) {
-        deleteCartItem(i_id, res, next, db);
+        deleteCartItem(c_id, i_id, res, next, db);
       }
     })
     .catch(err => {
       return next({
         status: 400,
         message: 'Cannot remove item from the cart',
+      });
+    })
+}
+
+exports.emptyCart = (req, res, next, db) => {
+  const { c_id } = req.params;
+  db('cart_item')
+    .where({ customer_id: c_id })
+    .del()
+    .then(resp => {
+      if (resp) {
+        res.status(200).json('success');
+      } else {
+        return next({
+          status: 400,
+          message: 'Cannot delete a cart item',
+        });
+      }
+    })
+    .catch(err => {
+      return next({
+        status: 400,
+        message: 'Error removing cart item',
       });
     })
 }
