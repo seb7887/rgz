@@ -88,6 +88,7 @@ class MyApp extends App {
           toggleCart={this.toggleCart}
           open={this.state.cartOpen}
           update={this.state.updateCart}
+          updateCart={this.updateCart}
         >
           <Component
             loadCustomer={this.loadCustomer}

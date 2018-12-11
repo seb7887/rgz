@@ -62,7 +62,12 @@ class Cart extends React.Component {
         </header>
 
         <ul>
-          { cartItems.map(item => <CartItem key={item.cart_item_id} cartItem={item} />) }
+          { cartItems.map(item =>
+            <CartItem 
+              key={item.cart_item_id}
+              cartItem={item}
+              updateCart={this.props.updateCart}
+            />) }
         </ul>
 
         <footer>

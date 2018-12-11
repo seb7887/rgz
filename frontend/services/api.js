@@ -175,6 +175,16 @@ export const addCartItem = (c_id, i_id, token) => {
   });
 }
 
+export const removeCartItem = (c_id, i_id, token) => {
+  return fetch(`${endpoint}/${c_id}/${i_id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    }
+  });
+}
+
 // Cloudinary API
 
 export const uploadImage = (data) => {
