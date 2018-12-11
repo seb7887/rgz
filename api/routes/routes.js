@@ -37,5 +37,6 @@ router.post('/:c_id/:i_id', auth.requireAuth, (req, res, next) => cart.addToCart
 router.get('/:c_id', auth.requireAuth, (req, res, next) => cart.getCart(req, res, next, db));
 router.delete('/:c_id/:i_id', auth.requireAuth, (req, res, next) => cart.removeFromCart(req, res, next, db));
 router.delete('/:c_id', auth.requireAuth, (req, res, next) => cart.emptyCart(req, res, next, db));
+router.get('/:c_id/total', auth.requireAuth, (req, res, next) => cart.totalItems(req, res, next, db));
 
 module.exports = router;

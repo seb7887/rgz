@@ -13,6 +13,7 @@ class MyApp extends App {
       count: 0,
       page: 1,
       cartOpen: false,
+      updateCart: false
     }
   }
   
@@ -72,6 +73,10 @@ class MyApp extends App {
     this.setState({ cartOpen: !this.state.cartOpen });
   }
 
+  updateCart = () => {
+    this.setState({ updateCart: !this.state.updateCart });
+  }
+
   render() {
     const { Component } = this.props;
     return (
@@ -82,6 +87,7 @@ class MyApp extends App {
           me={this.state.me}
           toggleCart={this.toggleCart}
           open={this.state.cartOpen}
+          update={this.state.updateCart}
         >
           <Component
             loadCustomer={this.loadCustomer}
@@ -92,6 +98,7 @@ class MyApp extends App {
             loadItem={this.loadItem}
             loadPage={this.loadPage}
             refreshItems={this.refreshItems}
+            updateCart={this.updateCart}
           />
         </Page>
       </Container>

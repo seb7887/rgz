@@ -165,6 +165,16 @@ export const getCartItems = (id, token) => {
   });
 }
 
+export const addCartItem = (c_id, i_id, token) => {
+  return fetch(`${endpoint}/${c_id}/${i_id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    }
+  });
+}
+
 // Cloudinary API
 
 export const uploadImage = (data) => {

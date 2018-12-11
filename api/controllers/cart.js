@@ -146,3 +146,22 @@ exports.emptyCart = (req, res, next, db) => {
       });
     })
 }
+
+// Get number of cart items
+exports.totalItems = (req, res, next, db) => {
+  const { c_id } = req.params;
+  db('cart_item')
+    .where({ customer_id: c_id})
+    .count()
+    .then(result => {
+      res.status(200).json({
+        total: result[0]
+      });
+    })
+    .catch(err => {
+      return next({
+        status: 400,
+        message: 'Cannot count items',
+      });
+    })
+}

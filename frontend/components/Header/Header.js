@@ -70,6 +70,7 @@ const Header = (props) => (
       <Cart
         open={props.open}
         toggleCart={props.toggleCart}
+        update={props.update}
       />
     }
   </StyledHeader>

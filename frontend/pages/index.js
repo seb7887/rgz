@@ -10,6 +10,7 @@ const Home = (props) => (
     loadItem={props.loadItem}
     loadPage={props.loadPage}
     refreshItems={props.refreshItems}
+    updateCart={props.updateCart}
   />
 )
 

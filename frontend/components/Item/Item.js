@@ -48,11 +48,13 @@ class Item extends React.Component {
         <PriceTag>{formatMoney(item.price)}</PriceTag>
         <p>{item.description}</p>
 
-        <div className="buttonList">
-          <a onClick={this.handleUpdate}>Edit</a>
-          <AddToCart />
-          <DeleteItem id={item.item_id} refreshItems={this.props.refreshItems}>Delete</DeleteItem>
-        </div>
+        { getCookie('token') && 
+          <div className="buttonList">
+            <a onClick={this.handleUpdate}>Edit</a>
+            <AddToCart id={item.item_id} updateCart={this.props.updateCart} />
+            <DeleteItem id={item.item_id} refreshItems={this.props.refreshItems}>Delete</DeleteItem>
+          </div>
+        }
       </StyledItem>
     );
   }

@@ -18,7 +18,7 @@ class Cart extends React.Component {
     };
   }
 
-  componentDidMount = async () => {
+  fetchCartItems = async () => {
     const token = getCookie('token');
     const current = await me(token);
     const customer = await current.json();
@@ -29,6 +29,16 @@ class Cart extends React.Component {
         me: customer,
         cartItems: items
       });
+    }
+  }
+
+  componentDidMount = () => {
+    this.fetchCartItems();
+  }
+
+  componentDidUpdate = (prevProps) => {
+    if (this.props.update !== prevProps.update) {
+      this.fetchCartItems();
     }
   }
 
