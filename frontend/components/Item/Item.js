@@ -5,6 +5,7 @@ import StyledItem from './StyledItem';
 import Title from '../styles/Title';
 import PriceTag from '../styles/PriceTag';
 import DeleteItem from '../DeleteItem/DeleteItem';
+import AddToCart from '../AddToCart/AddToCart';
 import formatMoney from '../../lib/formatMoney';
 import { getItem } from '../../services/api';
 import { getCookie } from '../../lib/session';
@@ -49,6 +50,7 @@ class Item extends React.Component {
 
         <div className="buttonList">
           <a onClick={this.handleUpdate}>Edit</a>
+          <AddToCart />
           <DeleteItem id={item.item_id} refreshItems={this.props.refreshItems}>Delete</DeleteItem>
         </div>
       </StyledItem>

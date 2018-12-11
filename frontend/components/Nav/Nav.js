@@ -17,9 +17,6 @@ const Nav = (props) => (
         <Link href="/orders">
           <a>Orders</a>
         </Link>
-        <Link href="/me">
-          <a>Account</a>
-        </Link>
         <Signout {...props} />
       </>
     )}
