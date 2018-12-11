@@ -90,6 +90,8 @@ exports.getCart = (req, res, next, db) => {
     .then(items => {
       if (items.length) {
         res.status(200).json(items);
+      } else {
+        res.status(200).json('Empty Cart');
       }
     })
     .catch(err => {

@@ -4,7 +4,6 @@ import Signout from '../Signout/Signout';
 import { getCookie } from '../../lib/session';
 
 const Nav = (props) => (
-  
   <NavStyles>
     <Link href="/">
       <a>Shop</a>
@@ -18,6 +17,9 @@ const Nav = (props) => (
           <a>Orders</a>
         </Link>
         <Signout {...props} />
+        <button onClick={props.toggleCart}>
+          My Cart
+        </button>
       </>
     )}
     {!getCookie('token') && (

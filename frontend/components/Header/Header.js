@@ -1,9 +1,12 @@
+import React from 'react';
 import Link from "next/link";
 import styled from 'styled-components';
 import NProgress from 'nprogress';
 import Router from 'next/router';
 import StyledHeader from "./StyledHeader";
 import Nav from "../Nav/Nav";
+import Cart from "../Cart/Cart";
+import { getCookie } from "../../lib/session";
 
 /**
  * NProgress slim progress bar setup
@@ -63,7 +66,12 @@ const Header = (props) => (
     <div className='sub-bar'>
       <p>Search</p>
     </div>
-    <div>Cart</div>
+    { getCookie('token') &&
+      <Cart
+        open={props.open}
+        toggleCart={props.toggleCart}
+      />
+    }
   </StyledHeader>
 );
 

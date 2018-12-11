@@ -18,6 +18,7 @@ router.post('/signup', validation.validateRegister, (req, res, next) => register
 router.post('/signin', validation.validateSignin, signin.signInAuth(db));
 
 // Customers
+router.get('/me', auth.requireAuth, (req, res, next) => customers.handleCurrentCustomer(req, res, next, db));
 router.get('/me/:id', auth.requireAuth, (req, res, next) => customers.handleCustomer(req, res, next, db));
 router.get('/customers', auth.requireAuth, (req, res, next) => customers.handleCustomers(req, res, next, db));
 router.put('/customers/:id', auth.requireAuth, auth.checkPermissionAdmin, (req, res, next) => customers.updatePermission(req, res, next, db));

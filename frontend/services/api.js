@@ -7,6 +7,16 @@ const requestHeaders = {
 
 // Backend API
 
+export const me = (token) => {
+  return fetch(`${endpoint}/me`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    }
+  });
+}
+
 export const signup = ({ name, email, password, passwordConfirm }) => {
   return fetch(`${endpoint}/signup`, {
     method: 'POST',
@@ -138,6 +148,16 @@ export const updateItem = (id, token, { title, brand, model, gender, product, de
 export const deleteItem = (id, token) => {
   return fetch(`${endpoint}/item/${id}`, {
     method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    }
+  });
+}
+
+export const getCartItems = (id, token) => {
+  return fetch(`${endpoint}/${id}`, {
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,

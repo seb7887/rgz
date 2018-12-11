@@ -1,3 +1,42 @@
+const { redisClient } = require('../controllers/signin');
+
+const getCustomer = (id, res, next, db) => {
+  db.select('*').from('customer').where('customer_id', '=', id)
+    .then(customer => {
+      if (customer.length) {
+        res.status(200).json(customer[0]);
+      } else {
+        return next({
+          status: 400,
+          message: 'Not found',
+        });
+      }
+    })
+    .catch(err => {
+      return next({
+        status: 400,
+        message: 'Error getting customer',
+      });
+    })
+}
+
+// Gets current customer
+exports.handleCurrentCustomer = (req, res, next, db) => {
+  const { authorization } = req.headers;
+  const token = authorization.split(' ')[1];
+
+  return redisClient.get(token, (err, reply) => {
+    const id = reply;
+    if (err || !reply) {
+      return next({
+        status: 401,
+        message: 'User undefined',
+      });
+    }
+    getCustomer(id, res, next, db);
+  })
+}
+
 // Gets a customer by id
 exports.handleCustomer = (req, res, next, db) => {
   const { id } = req.params;

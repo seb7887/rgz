@@ -11,7 +11,8 @@ class MyApp extends App {
       items: {},
       item: {},
       count: 0,
-      page: 1
+      page: 1,
+      cartOpen: false,
     }
   }
   
@@ -24,7 +25,7 @@ class MyApp extends App {
     return { items, val };
   }
 
-  componentWillMount() {
+  componentWillMount = async () => {
     this.setState({
       items: this.props.items,
       count: Number(this.props.val)
@@ -66,6 +67,11 @@ class MyApp extends App {
     Router.push('/');
   }
 
+  toggleCart = (e) => {
+    e.preventDefault();
+    this.setState({ cartOpen: !this.state.cartOpen });
+  }
+
   render() {
     const { Component } = this.props;
     return (
@@ -73,6 +79,9 @@ class MyApp extends App {
         <Page 
           unloadCustomer={this.unloadCustomer}
           refreshItems={this.refreshItems}
+          me={this.state.me}
+          toggleCart={this.toggleCart}
+          open={this.state.cartOpen}
         >
           <Component
             loadCustomer={this.loadCustomer}

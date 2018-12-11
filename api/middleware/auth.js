@@ -59,7 +59,6 @@ const checkPermission = (req, next, permissions) => {
 
   return redisClient.get(token, (err, reply) => {
     const id = reply;
-    console.log(`id ${id}`);
     hasPermission(id, permissions, next);
   })
 }
