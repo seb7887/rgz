@@ -5,6 +5,7 @@ import NProgress from 'nprogress';
 import Router from 'next/router';
 import StyledHeader from "./StyledHeader";
 import Nav from "../Nav/Nav";
+import Search from "../Search/Search";
 import Cart from "../Cart/Cart";
 import { getCookie } from "../../lib/session";
 
@@ -64,7 +65,7 @@ const Header = (props) => (
       <Nav {...props}/>
     </div>
     <div className='sub-bar'>
-      <p>Search</p>
+      <Search loadItem={props.loadItem} />
     </div>
     { getCookie('token') &&
       <Cart

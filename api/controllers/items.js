@@ -157,3 +157,25 @@ exports.deleteItem = (req, res, next, db) => {
       });
     })
 }
+
+// Search Items
+exports.searchItems = (req, res, next, db) => {
+  const { q }= req.query;
+  console.log(q);
+  db.select('*').from('item')
+    .where(db.raw(`lower(title) like '${q}%'`))
+    .orWhere(db.raw(`lower(description) like '${q}%'`))
+    .then(items => {
+      if (items.length) {
+        res.status(200).json(items);
+      } else {
+        res.status(200).json('No items found');
+      }
+    })
+    .catch(err => {
+      return next({
+        status: 400,
+        message: 'Cannot get items',
+      });
+    })
+}

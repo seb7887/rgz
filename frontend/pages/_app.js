@@ -84,6 +84,7 @@ class MyApp extends App {
         <Page 
           unloadCustomer={this.unloadCustomer}
           refreshItems={this.refreshItems}
+          loadItem={this.loadItem}
           me={this.state.me}
           toggleCart={this.toggleCart}
           open={this.state.cartOpen}

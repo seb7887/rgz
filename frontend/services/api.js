@@ -155,6 +155,13 @@ export const deleteItem = (id, token) => {
   });
 }
 
+export const searchItems = (query) => {
+  return fetch(`${endpoint}/search?q=${query}`, {
+    method: 'GET',
+    headers: requestHeaders
+  });
+}
+
 export const getCartItems = (id, token) => {
   return fetch(`${endpoint}/${id}`, {
     method: 'GET',
