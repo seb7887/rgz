@@ -6,6 +6,7 @@ const config = {
   clientURI: process.env.CLIENT_URI,
   redisURI: process.env.REDIS_URI,
   perPage: 4,
+  stripeSecret: process.env.STRIPE_SECRET,
 }
 
 module.exports = config;

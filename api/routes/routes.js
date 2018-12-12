@@ -8,6 +8,7 @@ const signin = require('../controllers/signin');
 const customers = require('../controllers/customers');
 const items = require('../controllers/items');
 const cart = require('../controllers/cart');
+const orders = require('../controllers/orders');
 
 // Middleware
 const validation = require('../middleware/validation');
@@ -39,5 +40,8 @@ router.get('/:c_id', auth.requireAuth, (req, res, next) => cart.getCart(req, res
 router.delete('/:c_id/:i_id', auth.requireAuth, (req, res, next) => cart.removeFromCart(req, res, next, db));
 router.delete('/:c_id', auth.requireAuth, (req, res, next) => cart.emptyCart(req, res, next, db));
 router.get('/:c_id/total', auth.requireAuth, (req, res, next) => cart.totalItems(req, res, next, db));
+
+// Orders
+router.post('/orders/:c_id', auth.requireAuth, (req, res, next) => orders.createOrder(req, res, next, db));
 
 module.exports = router;
