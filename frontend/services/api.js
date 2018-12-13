@@ -7,6 +7,9 @@ const requestHeaders = {
 
 // Backend API
 
+/**
+ * Customers
+ */
 export const me = (token) => {
   return fetch(`${endpoint}/me`, {
     method: 'GET',
@@ -74,6 +77,9 @@ export const updatePermissions = (permissions, id, token) => {
   });
 }
 
+/**
+ * Items
+ */
 export const createItem = ({ title, brand, model, gender, product, description, image, largeImage, price}, token) => {
   return fetch(`${endpoint}/item`, {
     method: 'POST',
@@ -162,8 +168,11 @@ export const searchItems = (query) => {
   });
 }
 
+/**
+ * Cart
+ */
 export const getCartItems = (id, token) => {
-  return fetch(`${endpoint}/${id}`, {
+  return fetch(`${endpoint}/cart/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -173,7 +182,7 @@ export const getCartItems = (id, token) => {
 }
 
 export const addCartItem = (c_id, i_id, token) => {
-  return fetch(`${endpoint}/${c_id}/${i_id}`, {
+  return fetch(`${endpoint}/cart/${c_id}/${i_id}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -183,8 +192,21 @@ export const addCartItem = (c_id, i_id, token) => {
 }
 
 export const removeCartItem = (c_id, i_id, token) => {
-  return fetch(`${endpoint}/${c_id}/${i_id}`, {
+  return fetch(`${endpoint}/cart/${c_id}/${i_id}`, {
     method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    }
+  });
+}
+
+/**
+ * Orders
+ */
+export const getOrders = (c_id, token) => {
+  return fetch(`${endpoint}/orders/${c_id}`, {
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,

@@ -35,13 +35,14 @@ router.put('/item/:id', auth.requireAuth, auth.checkPermissionUpdate, (req, res,
 router.delete('/item/:id', auth.requireAuth, auth.checkPermissionDelete, (req, res, next) => items.deleteItem(req, res, next, db));
 
 // Cart Items
-router.post('/:c_id/:i_id', auth.requireAuth, (req, res, next) => cart.addToCart(req, res, next, db));
-router.get('/:c_id', auth.requireAuth, (req, res, next) => cart.getCart(req, res, next, db));
-router.delete('/:c_id/:i_id', auth.requireAuth, (req, res, next) => cart.removeFromCart(req, res, next, db));
-router.delete('/:c_id', auth.requireAuth, (req, res, next) => cart.emptyCart(req, res, next, db));
-router.get('/:c_id/total', auth.requireAuth, (req, res, next) => cart.totalItems(req, res, next, db));
+router.post('/cart/:c_id/:i_id', auth.requireAuth, (req, res, next) => cart.addToCart(req, res, next, db));
+router.get('/cart/:c_id', auth.requireAuth, (req, res, next) => cart.getCart(req, res, next, db));
+router.delete('/cart/:c_id/:i_id', auth.requireAuth, (req, res, next) => cart.removeFromCart(req, res, next, db));
+router.delete('/cart/:c_id', auth.requireAuth, (req, res, next) => cart.emptyCart(req, res, next, db));
+router.get('/cart/:c_id/total', auth.requireAuth, (req, res, next) => cart.totalItems(req, res, next, db));
 
 // Orders
 router.post('/orders/:c_id', auth.requireAuth, (req, res, next) => orders.createOrder(req, res, next, db));
+router.get('/orders/:c_id', auth.requireAuth, (req, res, next) => orders.readOrders(req, res, next, db));
 
 module.exports = router;

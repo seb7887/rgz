@@ -101,6 +101,7 @@ class MyApp extends App {
             loadPage={this.loadPage}
             refreshItems={this.refreshItems}
             updateCart={this.updateCart}
+            me={this.state.me}
           />
         </Page>
       </Container>
