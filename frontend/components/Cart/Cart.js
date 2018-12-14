@@ -4,6 +4,7 @@ import Button from '../styles/Button';
 import CloseButton from '../styles/CloseButton';
 import Supreme from '../styles/Supreme';
 import CartItem from '../CartItem/CartItem';
+import Payment from '../Payment/Payment';
 import calcTotalPrice from '../../lib/calcTotalPrice';
 import formatMoney from '../../lib/formatMoney';
 import { getCookie } from '../../lib/session';
@@ -72,7 +73,15 @@ class Cart extends React.Component {
 
         <footer>
           <p>{formatMoney(calcTotalPrice(cartItems))}</p>
-          <Button>Checkout</Button>
+          { cartItems.length && (
+            <Payment
+              cart={cartItems}
+              customer={me}
+              updateCart={this.props.updateCart}
+            >
+              <Button>Checkout</Button>
+            </Payment>
+          )}
         </footer>
       </StyledCart>
     );

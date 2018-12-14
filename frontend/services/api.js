@@ -214,6 +214,19 @@ export const getOrders = (c_id, token) => {
   });
 }
 
+export const createOrder = (c_id, stripeToken, token) => {
+  return fetch(`${endpoint}/orders/${c_id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      token: stripeToken
+    })
+  });
+}
+
 // Cloudinary API
 
 export const uploadImage = (data) => {

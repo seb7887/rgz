@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { StyledOrders, OrderUl } from './StyledOrders';
 import formatMoney from '../../lib/formatMoney';
 import { getCookie } from '../../lib/session';
@@ -17,12 +16,15 @@ class Orders extends React.Component {
     const token = getCookie('token');
     const res = await getOrders(this.props.customer, token);
     const orders = await res.json();
-    this.setState({ orders: orders });
+    if (orders !== 'No orders') {
+      this.setState({ orders: orders });
+    }
   }
   
   render() {
     const { orders } = this.state;
-    return (
+    if (orders.length) {
+      return (
       <div>
         <h2>You have { orders.length } orders</h2>
         <OrderUl>
@@ -42,7 +44,14 @@ class Orders extends React.Component {
           ))}
         </OrderUl>
       </div>
-    );
+      );
+    } else {
+      return (
+        <div>
+          <h2>You have no orders!</h2>
+        </div>
+      );
+    }
   }
 }
 

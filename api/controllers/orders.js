@@ -93,7 +93,9 @@ const getOrders = async (c_id, res, next, db) => {
 
 exports.createOrder = async (req, res, next, db) => {
   try {
-    const { c_id, token } = req.params;
+    const { c_id } = req.params;
+    const { token } = req.body;
+    console.log(token);
     // - Get the current customer's cart
     const cartItems = await getCart(c_id, db);
     // - Recalculate the total for the price
@@ -123,6 +125,7 @@ exports.createOrder = async (req, res, next, db) => {
     }));
     // - Clear all cart items and respond
     emptyCart(c_id, res, next, db);
+    res.status(200).json('hey');
   } catch(err) {
     next({
       status: 400,
