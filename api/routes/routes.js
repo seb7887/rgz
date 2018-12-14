@@ -6,6 +6,7 @@ const db = require('../db/db');
 const register = require('../controllers/register');
 const signin = require('../controllers/signin');
 const customers = require('../controllers/customers');
+const password = require('../controllers/password');
 const items = require('../controllers/items');
 const cart = require('../controllers/cart');
 const orders = require('../controllers/orders');
@@ -23,6 +24,9 @@ router.get('/me', auth.requireAuth, (req, res, next) => customers.handleCurrentC
 router.get('/me/:id', auth.requireAuth, (req, res, next) => customers.handleCustomer(req, res, next, db));
 router.get('/customers', auth.requireAuth, (req, res, next) => customers.handleCustomers(req, res, next, db));
 router.put('/customers/:id', auth.requireAuth, auth.checkPermissionAdmin, (req, res, next) => customers.updatePermission(req, res, next, db));
+
+// Password Reset
+router.post('/recover', (req, res, next) => password.requestReset(req, res, next, db));
 
 // Items
 router.post('/item', auth.requireAuth, (req, res, next) => items.createItem(req, res, next, db));
