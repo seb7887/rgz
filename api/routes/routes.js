@@ -27,6 +27,7 @@ router.put('/customers/:id', auth.requireAuth, auth.checkPermissionAdmin, (req, 
 
 // Password Reset
 router.post('/recover', (req, res, next) => password.requestReset(req, res, next, db));
+router.post('/reset', validation.validateNewPwd, (req, res, next) => password.resetPassword(req, res, next, db));
 
 // Items
 router.post('/item', auth.requireAuth, (req, res, next) => items.createItem(req, res, next, db));

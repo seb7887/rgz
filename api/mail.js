@@ -4,7 +4,7 @@ const config = require('./libs/config');
 exports.transport = nodemailer.createTransport({
   host: "smtp.mailtrap.io",
   port: 2525,
-  secure: true,
+  secure: false,
   auth: {
     user: "6de717a6bef90a",
     pass: "d57140afeb669f",

@@ -39,3 +39,17 @@ exports.validateSignin = (req, res, next) => {
   }
   next();
 }
+
+exports.validateNewPwd = (req, res, next) => {
+  req.checkBody('password', 'Password cannot be blank').notEmpty();
+  req.checkBody('passwordConfirm', 'Confirmed password cannot be blank').notEmpty();
+  req.checkBody('passwordConfirm', 'Oops! Your passwords do not match').equals(req.body.password);
+  const errors = req.validationErrors();
+  if (errors) {
+    return next({
+      status: 400,
+      message: 'Form validation error',
+    });
+  }
+  next();
+}

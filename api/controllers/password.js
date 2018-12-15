@@ -13,6 +13,12 @@ const createReset = (userId, resetToken, resetTokenExpiry, db) => {
   }).returning('*');
 }
 
+const tokenIsValid = (resetToken, db) => {
+  return db.select('*').from('reset_password')
+    .where({ reset_token: resetToken })
+    .andWhere('reset_token_expires', '>', Date.now() - oneHour);
+}
+
 // Request Password Reset
 exports.requestReset = async (req, res, next, db) => {
   const { email } = req.body;
@@ -54,9 +60,26 @@ exports.requestReset = async (req, res, next, db) => {
 }
 
 // Reset Password
-exports.resetPassword = (req, res, next, db) => {
-  // - Check if the password match
+exports.resetPassword = async (req, res, next, db) => {
+  const { resetToken } = req.query;
+  const { password } = req.body;
+  console.log(resetToken);
+  try {
   // - Check if its a legit token
   // - Check if its expired
-  res.status(200).json('hey');
+    const token = await tokenIsValid(resetToken, db);
+    console.log(token[0]);
+    if(!token.length) {
+      next({
+        status: 400,
+        message: 'Invalid reset token',
+      });
+    }
+    res.status(200).json('hey');
+  } catch(err) {
+    next({
+      status: 400,
+      message: 'Error resetting password',
+    });
+  }
 }
