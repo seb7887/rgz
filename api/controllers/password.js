@@ -1,5 +1,6 @@
 const { randomBytes } = require('crypto');
 const { promisify } = require('util');
+const bcrypt = require('bcryptjs');
 const config = require('../libs/config');
 const mail = require('../mail');
 
@@ -11,12 +12,6 @@ const createReset = (userId, resetToken, resetTokenExpiry, db) => {
     reset_token: resetToken,
     reset_token_expires: resetTokenExpiry,
   }).returning('*');
-}
-
-const tokenIsValid = (resetToken, db) => {
-  return db.select('*').from('reset_password')
-    .where({ reset_token: resetToken })
-    .andWhere('reset_token_expires', '>', Date.now() - oneHour);
 }
 
 // Request Password Reset
@@ -59,23 +54,54 @@ exports.requestReset = async (req, res, next, db) => {
   }
 }
 
+const tokenIsValid = (resetToken, db) => {
+  return db.select('*').from('reset_password')
+    .where({ reset_token: resetToken })
+    .andWhere('reset_token_expires', '>', Date.now() - oneHour);
+}
+
+const getEmailFromId = (id, db) => {
+  return db.select('email').from('customer').where({ customer_id: id });
+}
+
+const updatePassword = (email, newHash, db) => {
+  return db('login')
+    .where({ email: email })
+    .update({ hash: newHash });
+}
+
 // Reset Password
 exports.resetPassword = async (req, res, next, db) => {
   const { resetToken } = req.query;
   const { password } = req.body;
-  console.log(resetToken);
   try {
-  // - Check if its a legit token
-  // - Check if its expired
+    // - Check if its a legit token
+    // - Check if its expired
     const token = await tokenIsValid(resetToken, db);
     console.log(token[0]);
     if(!token.length) {
       next({
         status: 400,
-        message: 'Invalid reset token',
+        message: 'Invalid or expired reset token',
       });
     }
-    res.status(200).json('hey');
+    const id = token[0].customer_id;
+    console.log(`id ${id}`);
+
+    // - Hash new password
+    const newHash = bcrypt.hashSync(password);
+
+    // - Save the new password to the customer and remove old reset token fields
+    const customerEmail = await getEmailFromId(id, db);
+    console.log(customerEmail[0]);
+    const updatedCustomer = await updatePassword(customerEmail[0].email, newHash, db);
+    if (!updatedCustomer) {
+      next({
+        status: 400,
+        message: 'Cannot update with new password',
+      })
+    }
+    res.status(200).json('success');
   } catch(err) {
     next({
       status: 400,

@@ -92,6 +92,10 @@ const Form = styled.form`
     flex-direction: row;
     font-size: 1.4rem;
   }
+
+  a{
+    color: ${props => props.theme.red};
+  }
 `;
 
 export default Form;

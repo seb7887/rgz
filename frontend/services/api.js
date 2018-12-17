@@ -44,6 +44,27 @@ export const signin = ({ email, password }) => {
   });
 }
 
+export const requestPwdRecover = (email) => {
+  return fetch(`${endpoint}/recover`, {
+    method: 'POST',
+    headers: requestHeaders,
+    body: JSON.stringify({
+      email: email
+    })
+  });
+}
+
+export const resetPwd = (password, passwordConfirm, token) => {
+  return fetch(`${endpoint}/reset?resetToken=${token}`, {
+    method: 'POST',
+    headers: requestHeaders,
+    body: JSON.stringify({
+      password: password,
+      passwordConfirm: passwordConfirm
+    })
+  });
+}
+
 export const getCustomer = ({ customerId, token }) => {
   return fetch(`${endpoint}/me/${customerId}`, {
     method: 'GET',

@@ -1,5 +1,6 @@
 import React from 'react';
 import Router from 'next/router';
+import Link from 'next/link';
 import Form from '../styles/Form';
 import { signin, getCustomer } from '../../services/api';
 import { setCookie } from '../../lib/session';
@@ -56,6 +57,9 @@ class Signin extends React.Component {
             />
           </label>
           <button type="submit">Sign In</button>
+          <Link href="/recover">
+            <a>Forgot password?</a>
+          </Link>
         </fieldset>
       </Form>
     );
