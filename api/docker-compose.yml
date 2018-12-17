@@ -1,0 +1,38 @@
+version: '3.6'
+
+services:
+  # Backend API
+  api:
+    container_name: rgz-backend
+    build: ./
+    command: npm start
+    working_dir: /usr/src/rgz-api
+    environment:
+      POSTGRES_URI: postgres://postgres:@postgres:5432/rgz
+      REDIS_URI: redis://redis:6379
+      CLIENT_URI: http://localhost:7777
+    links:
+      - postgres
+      - redis
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./:/usr/src/rgz-api
+
+  # Redis
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+
+    # Postgres
+  postgres:
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 
+      POSTGRES_DB: rgz
+      POSTGRES_HOST: postgres
+    build: ./postgres
+    ports:
+      - "5432:5432"

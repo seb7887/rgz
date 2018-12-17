@@ -1,0 +1,11 @@
+-- Customers (Users)
+insert into customer (name, email, permissions) values ('admin', 'admin@admin.com', '{admin}');
+insert into login (hash, email) values ('$2a$10$I/8eFtUo58YeatWLeB6lD.RBUJkb69.It7VEWafDdpPQgJHleUrna', 'admin@admin.com');
+insert into customer (name, email, permissions) values ('test', 'test@test.com', '{user}');
+insert into login (hash, email) values ('$2a$10$gUURnhcXOV0sJNrnzrDBAOAPn7aYbqbywhMkf90DXQOjR/3ExS/mq', 'test@test.com');
+
+-- Items
+insert into item (title, brand, model, gender, product, description, image, large_image, price) values ('necklace', 'MKT', 'Neck1234', 'female', 'accesories', 'Gold necklace', 'https://res.cloudinary.com/seb7887/image/upload/v1543943423/rgz/g545mlsypucxfeau2k9r.jpg', 'https://res.cloudinary.com/seb7887/image/upload/c_scale,f_auto,q_auto,w_1000/v1543943423/rgz/g545mlsypucxfeau2k9r.jpg', 50000);
+insert into item (title, brand, model, gender, product, description, image, large_image, price) values ('Puma snickers', 'Puma', 'PM213', 'male', 'shoes', 'Sport Snickers', 'https://res.cloudinary.com/seb7887/image/upload/v1543941935/rgz/ye2j36cs5kgttpavqkx0.jpg', 'https://res.cloudinary.com/seb7887/image/upload/c_scale,f_auto,q_auto,w_1000/v1543941935/rgz/ye2j36cs5kgttpavqkx0.jpg', 4000);
+insert into item (title, brand, model, gender, product, description, image, large_image, price) values ('Jeans', 'TRT', 'TR345', 'female', 'jeans', 'New jeans', 'https://res.cloudinary.com/seb7887/image/upload/v1543943284/rgz/qujpjiayqiemq3ijjs8z.jpg', 'https://res.cloudinary.com/seb7887/image/upload/c_scale,f_auto,q_auto,w_1000/v1543943284/rgz/qujpjiayqiemq3ijjs8z.jpg', 2500);
+insert into item (title, brand, model, gender, product, description, image, large_image, price) values ('Trousers', 'AK', 'Ak234', 'male', 'trousers', 'Work trousers', 'https://res.cloudinary.com/seb7887/image/upload/v1543943572/rgz/xxp2orff30ifzkl7tfcl.jpg', 'https://res.cloudinary.com/seb7887/image/upload/c_scale,f_auto,q_auto,w_1000/v1543943572/rgz/xxp2orff30ifzkl7tfcl.jpg', 1500);

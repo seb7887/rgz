@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const config = {
   jwtSecret: process.env.SECRET_KEY,
-  db: 'postgres://postgres:@postgres:5432/rgz-db',
+  db: process.env.POSTGRES_URI,
   clientURI: process.env.CLIENT_URI,
   redisURI: process.env.REDIS_URI,
   perPage: 4,

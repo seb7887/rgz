@@ -4,7 +4,7 @@ large: https://res.cloudinary.com/seb7887/image/upload/c_scale,f_auto,q_auto,w_1
 
 # Jeans
 image: https://res.cloudinary.com/seb7887/image/upload/v1543943284/rgz/qujpjiayqiemq3ijjs8z.jpg
-large: https://res.cloudinary.com/seb7887/image/upload/c_scale,f_auto,q_auto,w_1000/v1543943284/rgz/qujpjiayqiemq3ijjs8z.jp
+large: https://res.cloudinary.com/seb7887/image/upload/c_scale,f_auto,q_auto,w_1000/v1543943284/rgz/qujpjiayqiemq3ijjs8z.jpg
 
 # Accesories
 image: https://res.cloudinary.com/seb7887/image/upload/v1543943423/rgz/g545mlsypucxfeau2k9r.jpg

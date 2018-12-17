@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const redis = require('redis');
 const config = require('../libs/config');
 
-const redisClient = redis.createClient();
+const redisClient = redis.createClient(config.redisURI);
 
 // Checks if login data is correct and returns the customer
 const handleSignin = (req, res, next, db) => {

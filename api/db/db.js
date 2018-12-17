@@ -1,14 +1,10 @@
 const knex = require('knex');
+const config = require('../libs/config');
 
 // Connect to Database
 const db = knex({
   client: 'pg',
-  connection: {
-    host: '127.0.0.1',
-    user: 'postgres',
-    password: 'postgres',
-    database: 'rgz-db'
-  }
+  connection: config.db,
 });
 
 module.exports = db;
