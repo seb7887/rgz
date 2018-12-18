@@ -1,4 +1,4 @@
-# README
+# RGZ
 
 This is an example of an ecommerce full stack app. 
 
